@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="board">
+
+	<!-- 쿼리문 작성 -->
+	<insert id="insert" parameterType="com.javaex.vo.BoardVo">
+		<![CDATA[
+			insert into board
+			values (seq_guestbook_no.nextval, 
+			        #{title},
+			        #{content}, 
+			        #{hit}, 
+			        sysdate,
+			        #{userNo}
+			        )
+		]]>
+	</insert>
+
+	<select id="list" resultType="com.javaex.vo.BoardVo">
+		<![CDATA[
+			select a.no
+				 , title
+				 , content
+				 , hit
+				 , reg_date as regDate
+				 , user_no as userNo
+				 , b.name
+			from board a, users b
+			where a.user_no = b.no 
+			order by a.no desc
+		]]>
+	</select>
+
+	<delete id="delete" parameterType="com.javaex.vo.BoardVo">
+		<![CDATA[
+			delete from board
+			where no = #{no}
+		]]>
+	</delete>
+
+	<select id="selectOne" parameterType="int" resultType="com.javaex.vo.BoardVo">
+		<![CDATA[
+			select a.no
+				 , title
+				 , content
+				 , hit
+				 , reg_date as regDate
+				 , user_no as userNo
+				 , b.name
+			from board a, users b
+			where a.user_no = b.no and a.no = #{no}
+		]]>
+	</select>
+	
+	<update id="update" parameterType="com.javaex.vo.BoardVo">
+		<![CDATA[
+			update board 
+			set title = #{title}
+			  , content = #{content}
+			  , reg_date = sysDate 
+			where no = #{no}
+		]]>
+	</update>
+</mapper>
