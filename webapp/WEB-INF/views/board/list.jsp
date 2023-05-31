@@ -45,9 +45,9 @@
 
 			<div id="board">
 				<div id="list">
-					<form action="" method="">
+					<form action="${pageContext.request.contextPath}/board/list" method="get">
 						<div class="form-group text-right">
-							<input type="text">
+							<input type="text" name="keyword" value="">
 							<button type="submit" id=btn_search>검색</button>
 						</div>
 					</form>
@@ -69,8 +69,8 @@
 								<td class="text-left"><a href="${pageContext.request.contextPath}/board/read?no=${boardVo.no}">${boardVo.title}</a></td>
 								<td>${boardVo.name}</td>
 								<td>${boardVo.hit}</td>
-								<td><fmt:formatDate pattern="yyyy/MM/dd" value="${boardVo.regDate}"/></td>
-								<c:if test="${sessionScope.uInfo.no == boardVo.	userNo}">
+								<td>${boardVo.regDate}</td>
+								<c:if test="${sessionScope.uInfo.no == boardVo.userNo}">
 									<td><a href="${pageContext.request.contextPath}/board/delete?no=${boardVo.no}">[삭제]</a></td>
 								</c:if>
 							</tr>

@@ -23,9 +23,9 @@ public class BoardController {
 	private BoardService boardService;
 
 	@RequestMapping(value = "/board/list", method = { RequestMethod.GET, RequestMethod.POST })
-	public String boardList(Model model) {
+	public String boardList(@RequestParam(value = "keyword", required = false , defaultValue = "") String keyword ,Model model) {
 		System.out.println("BoardController.boardList()");
-		List<BoardVo> boardList = boardService.list();
+		List<BoardVo> boardList = boardService.list(keyword);
 		model.addAttribute("bList", boardList);
 		return "/WEB-INF/views/board/list.jsp";
 	}

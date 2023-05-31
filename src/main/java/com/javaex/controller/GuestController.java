@@ -15,7 +15,6 @@ import com.javaex.vo.GuestbookVo;
 
 @Controller
 public class GuestController {
-	
 	@Autowired
 	GuestbookService guestbookService;
 	
@@ -58,5 +57,4 @@ public class GuestController {
 		
 		return "redirect:/guestbook/guestbookList";
 	}
-	
 }

@@ -14,8 +14,8 @@ public class BoardService {
 	@Autowired
 	private BoardDao boardDao;
 
-	public List<BoardVo> list() {
-		List<BoardVo> boardList = boardDao.list();
+	public List<BoardVo> list(String keyword) {
+		List<BoardVo> boardList = boardDao.list(keyword);
 		return boardList;
 	}
 

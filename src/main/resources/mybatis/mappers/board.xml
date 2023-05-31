@@ -17,7 +17,7 @@
 		]]>
 	</insert>
 
-	<select id="list" resultType="com.javaex.vo.BoardVo">
+	<select id="list" parameterType="string" resultType="com.javaex.vo.BoardVo">
 		<![CDATA[
 			select a.no
 				 , title
@@ -28,6 +28,7 @@
 				 , b.name
 			from board a, users b
 			where a.user_no = b.no 
+			and title like '%'||#{keyword}||'%'
 			order by a.no desc
 		]]>
 	</select>
