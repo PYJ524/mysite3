@@ -33,7 +33,6 @@
 
 
 		<div id="content">
-
 			<div id="content-head">
 				<h3>게시판</h3>
 				<div id="location">
@@ -76,19 +75,17 @@
 						<!-- 제목 -->
 						<div class="form-group">
 							<label class="form-text" for="txt-title">제목</label> <input
-								type="text" id="txt-title" name="title"
-								value="${sessionScope.oneList.title}">
+								   type="text" id="txt-title" name="title"
+								   value="${sessionScope.oneList.title}">
 						</div>
 
 						<!-- 내용 -->
 						<div class="form-group">
 							<textarea id="txt-content" name = "content">${sessionScope.oneList.content}</textarea>
 						</div>
-
 						<a id="btn_cancel"
 							href="${pageContext.request.contextPath}/board/list">취소</a>
 						<button id="btn_modify" type="submit">수정</button>
-
 					</form>
 					<!-- //form -->
 				</div>

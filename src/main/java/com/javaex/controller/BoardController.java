@@ -22,7 +22,7 @@ public class BoardController {
 	@Autowired
 	private BoardService boardService;
 
-	@RequestMapping(value = "/board/list", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/board/list", method = {RequestMethod.GET, RequestMethod.POST })
 	public String boardList(@RequestParam(value = "keyword", required = false , defaultValue = "") String keyword ,Model model) {
 		System.out.println("BoardController.boardList()");
 		List<BoardVo> boardList = boardService.list(keyword);

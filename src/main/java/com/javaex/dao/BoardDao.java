@@ -16,6 +16,7 @@ public class BoardDao {
 
 	/* 게시판 리스트 출력용 */
 	public List<BoardVo> list(String keyword) {
+		System.out.println("RBoardController.list()");
 		List<BoardVo> boardList = sqlSession.selectList("board.list", keyword);
 		System.out.println(boardList);
 		return boardList;
