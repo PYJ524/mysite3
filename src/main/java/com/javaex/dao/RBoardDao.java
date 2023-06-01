@@ -15,10 +15,13 @@ public class RBoardDao {
 	private SqlSession sqlSession;
 	
 	public List<RBoardVo> list(){
-		System.out.println("RBoardDao.list()");
 		List<RBoardVo> list = sqlSession.selectList("rBoard.list"); 
-		System.out.println("DAO 에 오니"+list);
 		
 		return list;
+	}
+		
+	/* 게시판 작성글 추가용 */
+	public void insert(RBoardVo vo) {
+		sqlSession.insert("rBoard.insert", vo);
 	}
 }

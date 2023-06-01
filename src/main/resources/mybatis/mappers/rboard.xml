@@ -21,4 +21,34 @@
 		]]>
 	</select>
 	
+	<insert id="insert" parameterType="com.javaex.vo.RBoardVo">
+		<![CDATA[
+			insert into rboard 
+			values(seq_rboard_no.nextval
+			     , #{userNo}
+			     , #{title}
+			     , #{Content}
+			     , 0
+			     , sysdate
+			     , seq_rboard_gno.nextval
+			     , 1
+			     , 0)
+		]]>
+	</insert>
+	
+	<insert id="insert2" parameterType="com.javaex.vo.RBoardVo">
+		<![CDATA[
+			insert into rboard 
+			values(seq_rboard_no.nextval
+			     , #{userNo}
+			     , #{title}
+			     , #{Content}
+			     , #{hit}
+			     , sysdate
+			     , #{groupNo}
+			     , #{orderNo}
+			     , #{depth})
+		]]>
+	</insert>
+	
 </mapper>

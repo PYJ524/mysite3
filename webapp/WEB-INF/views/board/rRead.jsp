@@ -24,21 +24,20 @@
 		<!-- //aside -->
 
 		<div id="content">
-
 			<div id="content-head">
-				<h3>게시판</h3>
+				<h3>댓글 게시판</h3>
 				<div id="location">
 					<ul>
 						<li>홈</li>
 						<li>게시판</li>
-						<li class="last">일반 게시판</li>
+						<li class="last">댓글 게시판</li>
 					</ul>
 				</div>
 				<div class="clear"></div>
 			</div>
 			<!-- //content-head -->
 
-			<div id="board">
+			<div id="rBoard">
 				<div id="read">
 					<form action="#" method="get">
 						<!-- 작성자 -->
@@ -69,10 +68,11 @@
 						<div id="txt-content">
 							<pre class="form-value">${sessionScope.oneList.content}</pre>
 						</div>
-						
-						<a id="btn_modify" href="${pageContext.request.contextPath}/board/modifyForm?no=${boardVo.no}">수정</a>
+						<c:if test="${sessionScope.uInfo.no != null}">
+							<a id="btn_modify" href="${pageContext.request.contextPath}/rboard/modifyForm?no=${boardVo.no}">수정</a>
+						</c:if>
 						<a id="btn_modify" href="${pageContext.request.contextPath}/board/list">목록</a>
-						
+						<a id="btn_modify" href="${pageContext.request.contextPath}/rboard/write">댓글</a>
 					</form>
 	                <!-- //form -->
 				</div>

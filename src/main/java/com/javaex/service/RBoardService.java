@@ -19,4 +19,9 @@ public class RBoardService {
 		List<RBoardVo> list = rBoardDao.list(); 
 		return list;
 	}
+	
+	public void write(RBoardVo rBoardVo) {
+		rBoardDao.insert(rBoardVo);
+	}
+		
 }

@@ -17,7 +17,8 @@
 		]]>
 	</insert>
 
-	<select id="list" parameterType="string" resultType="com.javaex.vo.BoardVo">
+	<select id="list" parameterType="string"
+		resultType="com.javaex.vo.BoardVo">
 		<![CDATA[
 			select a.no
 				 , title
@@ -27,8 +28,14 @@
 				 , user_no as userNo
 				 , b.name
 			from board a, users b
-			where a.user_no = b.no 
+			where a.user_no = b.no
+		]]>
+
+		<if test="value !='' and value !=null">
 			and title like '%'||#{keyword}||'%'
+		</if>
+			
+		<![CDATA[
 			order by a.no desc
 		]]>
 	</select>
@@ -40,7 +47,8 @@
 		]]>
 	</delete>
 
-	<select id="selectOne" parameterType="int" resultType="com.javaex.vo.BoardVo">
+	<select id="selectOne" parameterType="int"
+		resultType="com.javaex.vo.BoardVo">
 		<![CDATA[
 			select a.no
 				 , title
@@ -53,7 +61,7 @@
 			where a.user_no = b.no and a.no = #{no}
 		]]>
 	</select>
-	
+
 	<update id="update" parameterType="com.javaex.vo.BoardVo">
 		<![CDATA[
 			update board 
