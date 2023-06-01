@@ -16,12 +16,17 @@ public class RBoardDao {
 	
 	public List<RBoardVo> list(){
 		List<RBoardVo> list = sqlSession.selectList("rBoard.list"); 
-		
+		System.out.println(list);
 		return list;
 	}
 		
 	/* 게시판 작성글 추가용 */
 	public void insert(RBoardVo vo) {
+		System.out.println("RBoardDao.insert()");
 		sqlSession.insert("rBoard.insert", vo);
+	}
+	
+	public RBoardVo oneSelect(int no) {
+		return sqlSession.selectOne("rBoard.selectOne", no);
 	}
 }

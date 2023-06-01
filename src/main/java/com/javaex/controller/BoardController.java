@@ -26,6 +26,7 @@ public class BoardController {
 	public String boardList(@RequestParam(value = "keyword", required = false , defaultValue = "") String keyword ,Model model) {
 		System.out.println("BoardController.boardList()");
 		List<BoardVo> boardList = boardService.list(keyword);
+		System.out.println(boardList);
 		model.addAttribute("bList", boardList);
 		return "/WEB-INF/views/board/list.jsp";
 	}

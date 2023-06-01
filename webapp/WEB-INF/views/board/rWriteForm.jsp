@@ -46,7 +46,7 @@
 				<div class="clear"></div>
 			</div>
 			<!-- //content-head -->
-			<div id="rBoard">
+			<div id="board">
 				<div id="writeForm">
 					<form action="${pageContext.request.contextPath}/rBoard/write" method="get">
 						<!-- 제목 -->

@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.javaex.service.RBoardService;
 import com.javaex.vo.RBoardVo;
@@ -33,16 +34,22 @@ public class RBoardController {
 	
 	@RequestMapping(value = "/rBoard/write", method = { RequestMethod.GET, RequestMethod.POST })
 	public String write(@ModelAttribute RBoardVo rBoardVo, HttpSession session) {
-		System.out.println("BoardControllder.write()");
+		System.out.println("RBoardControllder.write()");
 		UserVo vo = (UserVo) session.getAttribute("uInfo");
 		rBoardVo.setUserNo(vo.getNo());
 		rBoardService.write(rBoardVo);
-		return "redirect:/board/list";
+		return "redirect:/rBoard/list";
 	}
 	
 	@RequestMapping(value = "/rBoard/writeForm", method = { RequestMethod.GET, RequestMethod.POST })
 	public String writeForm() {
 		System.out.println("RBoardController.writeForm()");
 		return "/WEB-INF/views/board/rWriteForm.jsp";
+	}
+	
+	@RequestMapping(value = "/rBoard/read", method= {RequestMethod.GET, RequestMethod.POST})
+	public String read(@RequestParam("no") int no, HttpSession session) {
+		session.setAttribute("oneList", rBoardService.read(no));
+		return "/WEB-INF/views/board/read.jsp";
 	}
 }

@@ -21,7 +21,12 @@ public class RBoardService {
 	}
 	
 	public void write(RBoardVo rBoardVo) {
+		System.out.println("RBoardService.write()");
 		rBoardDao.insert(rBoardVo);
+	}
+	
+	public RBoardVo read(int no) {
+		return rBoardDao.oneSelect(no);
 	}
 		
 }

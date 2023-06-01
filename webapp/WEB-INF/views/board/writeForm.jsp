@@ -19,7 +19,6 @@
 	var text = document.getElementById("textarea").value;
 	text = text.replaceAll("<br>", "\r\n");
 </script>
-
 </head>
 
 <body>

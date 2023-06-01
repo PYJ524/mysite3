@@ -10,12 +10,15 @@ public class RBoardVo {
 	private int groupNo;
 	private int orderNo;
 	private int depth;
+	private String name;
+	
 	public RBoardVo() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
 	public RBoardVo(int no, int userNo, String title, String content, int hit, String regDate, int groupNo, int orderNo,
-			int depth) {
+			int depth, String name) {
 		super();
 		this.no = no;
 		this.userNo = userNo;
@@ -26,6 +29,7 @@ public class RBoardVo {
 		this.groupNo = groupNo;
 		this.orderNo = orderNo;
 		this.depth = depth;
+		this.name = name;
 	}
 	public int getNo() {
 		return no;
@@ -81,11 +85,18 @@ public class RBoardVo {
 	public void setDepth(int depth) {
 		this.depth = depth;
 	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 	@Override
 	public String toString() {
 		return "RBoardVo [no=" + no + ", userNo=" + userNo + ", title=" + title + ", content=" + content + ", hit="
 				+ hit + ", regDate=" + regDate + ", groupNo=" + groupNo + ", orderNo=" + orderNo + ", depth=" + depth
-				+ "]";
+				+ ", name=" + name + "]";
 	}
+	
 	
 }

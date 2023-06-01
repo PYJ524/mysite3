@@ -6,7 +6,7 @@
 	<!-- 쿼리문 작성 -->
 	<select id="list" resultType ="com.javaex.vo.RBoardVo">
 		<![CDATA[
-			select no
+			select a.no
 				 , user_no as userNo
 				 , title
 				 , content
@@ -15,7 +15,9 @@
 				 , group_no as groupNo
 				 , order_no as orderNo
 				 , depth
-			from rboard
+				 , b.name
+			from rboard a, users b
+			where a.user_no = b.no
 			order by group_no DESC
 				   , order_no ASC
 		]]>
@@ -27,7 +29,7 @@
 			values(seq_rboard_no.nextval
 			     , #{userNo}
 			     , #{title}
-			     , #{Content}
+			     , #{content}
 			     , 0
 			     , sysdate
 			     , seq_rboard_gno.nextval
@@ -43,12 +45,30 @@
 			     , #{userNo}
 			     , #{title}
 			     , #{Content}
-			     , #{hit}
+			     , 0
 			     , sysdate
 			     , #{groupNo}
 			     , #{orderNo}
 			     , #{depth})
 		]]>
 	</insert>
+	
+	<select id="selectOne" parameterType="int"
+		resultType="com.javaex.vo.RBoardVo">
+		<![CDATA[
+			select a.no
+				 , user_no as userNo
+				 , title
+				 , content
+				 , hit
+				 , reg_date as regDate
+				 , group_no as groupNo
+				 , order_no as orderNo
+				 , depth
+				 , b.name
+			from rboard a, users b
+			where a.user_no = b.no and a.no = #{no}
+		]]>
+	</select>
 	
 </mapper>

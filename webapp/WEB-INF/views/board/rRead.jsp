@@ -37,7 +37,7 @@
 			</div>
 			<!-- //content-head -->
 
-			<div id="rBoard">
+			<div id="board">
 				<div id="read">
 					<form action="#" method="get">
 						<!-- 작성자 -->

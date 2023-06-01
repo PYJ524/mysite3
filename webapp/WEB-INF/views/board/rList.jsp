@@ -58,9 +58,10 @@
 							<tr>
 								<th>번호</th>
 								<th>제목</th>
-								<th>그룹번호</th>
-								<th>자식번호</th>
-								<th>너비</th>
+								<th>글쓴이</th>
+								<th>조회수</th>
+								<th>작성일</th>
+								<th>관리</th>
 							</tr>
 						</thead>
 						<c:forEach items="${rbList}" var="rBoardVo">
@@ -73,9 +74,9 @@
 											${rBoardVo.title} 
 										</a>
 									</td>
-									<td>${rBoardVo.groupNo}</td>
-									<td>${rBoardVo.orderNo}</td>
-									<td>${rBoardVo.depth}</td>
+									<td>${rBoardVo.name}</td>
+									<td>${rBoardVo.hit}</td>
+									<td>${rBoardVo.regDate}</td>
 									<c:if test="${sessionScope.uInfo.no == rBoardVo.userNo}">
 										<td><a
 											href="${pageContext.request.contextPath}/rBoard/delete?no=${rBoardVo.no}">[삭제]</a></td>
