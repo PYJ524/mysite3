@@ -8,8 +8,41 @@
 <title>Insert title here</title>
 <link href="${pageContext.request.contextPath}/assets/css/mysite.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath}/assets/css/user.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/jquery/jquery-1.12.4.js"></script>
 
 </head>
+
+<script type="text/javascript">
+			
+	// 아이디 중복체크 버튼 클릭했을 때
+	$(window).load(function(){
+		$("#checkId").on("click",function(){
+			console.log("버튼클릭");
+			var id = $("[name=id]").val();
+			console.log(id);
+			$.ajax({
+				url : "${pageContext.request.contextPath}/user/checkId" ,
+				type : "post",
+				/* contentType : "application/json", */
+				data : {id : id} , 
+				dataType : "json" ,
+				success : function(result){
+					if (result == true) {
+					//성공시 처리해야될 코드 작성
+						$("#resultId").html("<font size ='2' color = 'grey' id='idcheckMsg'>사용할 수 있는 아이디입니다.</font>");
+					} else {
+						// 여기에 실패 메시지를 출력하는 코드를 추가할 수 있습니다.
+						$("#resultId").html("<font size ='2' color = 'grey' id='idcheckMsg'>사용할 수 없는 아이디입니다.</font>");
+					}
+				},
+				error : function(XHR, status, error) {
+					console.error(status + " : " + error);
+				}
+			});  
+			// html("<font size ='2' color = 'grey' id='idcheckMsg'>사용할 수 없는 아이디입니다.</font>")
+		});
+	})
+</script>
 
 <body>
 	<div id="wrap">
@@ -51,9 +84,9 @@
 						<div class="form-group">
 							<label class="form-text" for="input-uid">아이디</label> 
 							<input type="text" id="input-uid" name="id" value="" placeholder="아이디를 입력하세요">
-							<button type="button" id="">중복체크</button>
+							<button type="button" id="checkId">중복체크</button>
 						</div>
-
+						<p id="resultId" ></p>
 						<!-- 비밀번호 -->
 						<div class="form-group">
 							<label class="form-text" for="input-pass">패스워드</label> 
@@ -107,5 +140,6 @@
 	<!-- //wrap -->
 
 </body>
+
 
 </html>

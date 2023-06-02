@@ -43,11 +43,9 @@
 				<div class="clear"></div>
 			</div>
 			<!-- //content-head -->
-
 			<div id="board">
 				<div id="list">
-					<form action="${pageContext.request.contextPath}/rBoard/list"
-						method="get">
+					<form action="${pageContext.request.contextPath}/rBoard/list" method="get">
 						<div class="form-group text-right">
 							<input type="text" name="keyword" value="">
 							<button type="submit" id=btn_search>검색</button>
@@ -68,18 +66,13 @@
 							<tbody>
 								<tr>
 									<td>${rBoardVo.no}</td>
-									<td class="text-left">
-										<c:forEach begin="0" end="${rBoardVo.depth}">&nbsp;&nbsp;&nbsp;&nbsp;</c:forEach> 
-	               						<a href="${pageContext.request.contextPath}/rBoard/read?no=${rBoardVo.no}">
-											${rBoardVo.title} 
-										</a>
-									</td>
+									<td class="text-left"><a
+										href="${pageContext.request.contextPath}/rBoard/read?no=${rBoardVo.no}">${rBoardVo.title} </a></td>
 									<td>${rBoardVo.name}</td>
 									<td>${rBoardVo.hit}</td>
 									<td>${rBoardVo.regDate}</td>
 									<c:if test="${sessionScope.uInfo.no == rBoardVo.userNo}">
-										<td><a
-											href="${pageContext.request.contextPath}/rBoard/delete?no=${rBoardVo.no}">[삭제]</a></td>
+										<td><a href="${pageContext.request.contextPath}/rBoard/delete?no=${rBoardVo.no}">[삭제]</a></td>
 									</c:if>
 								</tr>
 							</tbody>

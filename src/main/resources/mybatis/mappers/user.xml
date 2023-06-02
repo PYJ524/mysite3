@@ -57,4 +57,12 @@
 			order by no desc
 		]]>
 	</select>	
+	<select id="checkId" parameterType="string"
+		resultType="com.javaex.vo.UserVo">
+		<![CDATA[
+			select id
+			from users
+			where id = #{id}
+		]]>
+	</select>
 </mapper>

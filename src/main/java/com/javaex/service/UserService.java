@@ -37,4 +37,11 @@ public class UserService {
 			System.err.println("수정에 실패했습니다.");
 		}
 	}
+	public boolean checkId(String id) {
+		boolean result = false;
+		UserVo vo = userDao.checkId(id);
+		System.out.println(vo);
+		if(vo == null) {result = true;}
+		return result;
+	}
 }

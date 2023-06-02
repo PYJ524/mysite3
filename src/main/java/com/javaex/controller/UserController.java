@@ -2,11 +2,14 @@ package com.javaex.controller;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.javaex.service.UserService;
 import com.javaex.vo.UserVo;
@@ -91,6 +94,17 @@ public class UserController {
 		session.setAttribute("uInfo", userVo);
 		
 		return "redirect:/main";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/user/checkId")
+	public boolean checkId(@RequestParam("id") String id) {
+		System.out.println(id);
+		System.out.println("UserController.chechId()");
+		boolean result = userService.checkId(id);
+		System.out.println(result);
+		
+		return result;
 	}
 		
 	

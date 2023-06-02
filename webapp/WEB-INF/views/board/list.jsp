@@ -1,15 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="${pageContext.request.contextPath}/assets/css/mysite.css" rel="stylesheet"
-	type="text/css">
-<link href="${pageContext.request.contextPath}/assets/css/board.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/assets/css/mysite.css"
+	rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/assets/css/board.css"
+	rel="stylesheet" type="text/css">
+
+<style type="text/css">
+.cell-space {
+	white-space: pre-wrap;
+}
+</style>
 
 </head>
 <body>
@@ -57,18 +64,19 @@
 							</tr>
 						</thead>
 						<c:forEach items="${bList}" var="boardVo">
-						<tbody>
-							<tr>
-								<td>${boardVo.no}</td>
-								<td class="text-left"><a href="${pageContext.request.contextPath}/board/read?no=${boardVo.no}">${boardVo.title}</a></td>
-								<td>${boardVo.name}</td>
-								<td>${boardVo.hit}</td>
-								<td>${boardVo.regDate}</td>
-								<c:if test="${sessionScope.uInfo.no == boardVo.userNo}">
-									<td><a href="${pageContext.request.contextPath}/board/delete?no=${boardVo.no}">[삭제]</a></td>
-								</c:if>
-							</tr>
-						</tbody>
+							<tbody>
+								<tr>
+									<td>${boardVo.no}</td>
+									<td class="text-left"><a
+										href="${pageContext.request.contextPath}/board/read?no=${boardVo.no}">${boardVo.title}</a></td>
+									<td>${boardVo.name}</td>
+									<td>${boardVo.hit}</td>
+									<td>${boardVo.regDate}</td>
+									<c:if test="${sessionScope.uInfo.no == boardVo.userNo}">
+										<td><a href="${pageContext.request.contextPath}/board/delete?no=${boardVo.no}">[삭제]</a></td>
+									</c:if>
+								</tr>
+							</tbody>
 						</c:forEach>
 					</table>
 
@@ -92,11 +100,13 @@
 						<div class="clear"></div>
 					</div>
 					<c:if test="${sessionScope.uInfo.no != null}">
-						<a id="btn_write" href="${pageContext.request.contextPath}/board/writeForm">글쓰기</a>
+						<a id="btn_write"
+							href="${pageContext.request.contextPath}/board/writeForm">글쓰기</a>
 					</c:if>
 					<c:if test="${sessionScope.uInfo.no == null}">
 						<a>${sessionScope.no}</a>
-						<a id="btn_write" href="${pageContext.request.contextPath}/user/loginForm">글쓰기</a>
+						<a id="btn_write"
+							href="${pageContext.request.contextPath}/user/loginForm">글쓰기</a>
 					</c:if>
 				</div>
 				<!-- //list -->
