@@ -24,8 +24,8 @@
 		<div id="aside">
 			<h2>방명록</h2>
 			<ul>
-				<li>일반방명록</li>
-				<li>ajax방명록</li>
+				<li><a href="${pageContext.request.contextPath}/guestbook/guestbookList">일반방명록</a></li>
+				<li><a href="${pageContext.request.contextPath}/api/guestbook/addList">AJAX방명록</a></li>
 			</ul>
 		</div>
 		<!-- //aside -->
@@ -84,7 +84,7 @@
 							<td>${guestbookVo.no}</td>
 							<td>${guestbookVo.name}</td>
 							<td>${guestbookVo.regDate}</td>
-							<td><a href="${pageContext.request.contextPath}e/guestbook/deleteForm?no=${guestbookVo.no}">[삭제]</a></td>
+							<td><a href="${pageContext.request.contextPath}/guestbook/deleteForm?no=${guestbookVo.no}">[삭제]</a></td>
 						</tr>
 						<tr>
 							<td colspan=4 class="text-left">${guestbookVo.content}</td>

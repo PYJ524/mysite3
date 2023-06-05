@@ -29,7 +29,19 @@ public class GuestbookDao {
 		System.out.println(vo);
 		sqlSession.insert("guestbook.insert", vo);
 	}
+
+	public void insertSelectKey(GuestbookVo vo) {
+		System.out.println("GusetbookDao.insert2()");
+		System.out.println(vo);
+		sqlSession.insert("guestbook.insertSelectKey", vo);
+	}
+	
 	public void delete(GuestbookVo vo) {
 		sqlSession.delete("guestbook.delete", vo);
+	}
+	
+	public GuestbookVo selectGuest(int no) {
+		
+		return sqlSession.selectOne("guestbook.에이젝스리스트", no); 
 	}
 }

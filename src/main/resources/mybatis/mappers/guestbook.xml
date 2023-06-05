@@ -29,4 +29,27 @@
 		]]>
 	</delete>
 	
+	<insert id="insertSelectKey" parameterType="com.javaex.vo.GuestbookVo">
+		<selectKey keyProperty="no" resultType="int" order="BEFORE">	
+			select seq_guestbook_no.nextval from dual
+		</selectKey>
+		<![CDATA[
+			insert into guestbook
+			values (#{no}, #{name}, #{password}, #{content}, SYSDATE)
+		]]>
+	</insert>
+	
+	<select id="에이젝스리스트" parameterType="int"
+	resultType="com.javaex.vo.GuestbookVo">
+		<![CDATA[
+			select no
+				 , name
+				 , password
+				 , content
+				 , reg_date as regDate
+			from guestbook	
+			where no = #{no}
+		]]>
+	</select>
+	
 </mapper>

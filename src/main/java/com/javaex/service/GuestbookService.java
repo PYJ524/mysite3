@@ -33,4 +33,11 @@ public class GuestbookService {
 		guestbookDao.delete(vo);
 	}
 	
+	
+	// ajax 방명록 등록때 사용
+	public GuestbookVo addGuest(GuestbookVo guestbookVo) {
+		System.out.println("GusetbookService.addGuest()");
+		guestbookDao.insertSelectKey(guestbookVo);
+		return guestbookDao.selectGuest(guestbookVo.getNo());
+	}
 }

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.javaex.service.UserService;
+import com.javaex.vo.JsonResult;
 import com.javaex.vo.UserVo;
 
 @Controller
@@ -98,13 +99,30 @@ public class UserController {
 	
 	@ResponseBody
 	@RequestMapping(value="/user/checkId")
-	public boolean checkId(@RequestParam("id") String id) {
+	public JsonResult checkId(@RequestParam("id") String id) {
 		System.out.println(id);
-		System.out.println("UserController.chechId()");
-		boolean result = userService.checkId(id);
-		System.out.println(result);
+		System.out.println("UserController.checkId()");
+		boolean data = userService.checkId(id);
+		System.out.println(data);
 		
-		return result;
+		JsonResult jsonResult = new JsonResult();
+		jsonResult.success(data);
+
+		
+//		jsonResult.fail("통신오류");
+		
+		/*
+		 * getter, setter 사용할 경우 --> 잘못 사용할 가능성이 높다
+		jsonResult.setResult("success"); 
+		jsonResult.setData(data);
+		
+		
+		jsonResult.setResult("fail");
+		jsonResult.setFailMsg("통신 오류");
+		*/
+		System.out.println(jsonResult);
+		
+		return jsonResult;
 	}
 		
 	

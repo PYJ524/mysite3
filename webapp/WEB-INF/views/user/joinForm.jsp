@@ -26,13 +26,19 @@
 				/* contentType : "application/json", */
 				data : {id : id} , 
 				dataType : "json" ,
-				success : function(result){
-					if (result == true) {
-					//성공시 처리해야될 코드 작성
-						$("#resultId").html("<font size ='2' color = 'grey' id='idcheckMsg'>사용할 수 있는 아이디입니다.</font>");
-					} else {
-						// 여기에 실패 메시지를 출력하는 코드를 추가할 수 있습니다.
-						$("#resultId").html("<font size ='2' color = 'grey' id='idcheckMsg'>사용할 수 없는 아이디입니다.</font>");
+				success : function(jsonResult){
+					console.log(jsonResult);
+					if(jsonResult.result == 'success'){	
+						if (jsonResult.data == true) {
+						//성공시 처리해야될 코드 작성
+							$("#resultId").html("<font size ='2' color = 'grey' id='idcheckMsg'>사용할 수 있는 아이디입니다.</font>");
+						} else {
+							// 여기에 실패 메시지를 출력하는 코드를 추가할 수 있습니다.
+							$("#resultId").html("<font size ='2' color = 'red' id='idcheckMsg'>이미 사용중인 아이디입니다.</font>");
+						}
+					}else{
+						var msg = jsonResult.failMsg;
+						alert(msg);
 					}
 				},
 				error : function(XHR, status, error) {
@@ -86,7 +92,9 @@
 							<input type="text" id="input-uid" name="id" value="" placeholder="아이디를 입력하세요">
 							<button type="button" id="checkId">중복체크</button>
 						</div>
-						<p id="resultId" ></p>
+						<p id="resultId" >
+							
+						</p>
 						<!-- 비밀번호 -->
 						<div class="form-group">
 							<label class="form-text" for="input-pass">패스워드</label> 
