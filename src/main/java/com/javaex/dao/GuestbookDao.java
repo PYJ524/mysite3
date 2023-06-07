@@ -36,8 +36,9 @@ public class GuestbookDao {
 		sqlSession.insert("guestbook.insertSelectKey", vo);
 	}
 	
-	public void delete(GuestbookVo vo) {
-		sqlSession.delete("guestbook.delete", vo);
+	public int delete(GuestbookVo vo) {
+		
+		return sqlSession.delete("guestbook.delete", vo);
 	}
 	
 	public GuestbookVo selectGuest(int no) {

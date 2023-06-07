@@ -26,6 +26,7 @@
 			<ul>
 				<li><a href="${pageContext.request.contextPath}/guestbook/guestbookList">일반방명록</a></li>
 				<li><a href="${pageContext.request.contextPath}/api/guestbook/addList">AJAX방명록</a></li>
+				<li><a href="${pageContext.request.contextPath}/api/guestbook/addList2">AJAX방명록2</a></li>
 			</ul>
 		</div>
 		<!-- //aside -->

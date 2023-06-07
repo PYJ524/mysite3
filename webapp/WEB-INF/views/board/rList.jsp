@@ -48,7 +48,7 @@
 					<form action="${pageContext.request.contextPath}/rBoard/list" method="get">
 						<div class="form-group text-right">
 							<input type="text" name="keyword" value="">
-							<button type="submit" id=btn_search>검색</button>
+							<button type="submit" id="btn_search">검색</button>
 						</div>
 					</form>
 					<table>
@@ -66,8 +66,11 @@
 							<tbody>
 								<tr>
 									<td>${rBoardVo.no}</td>
-									<td class="text-left"><a
-										href="${pageContext.request.contextPath}/rBoard/read?no=${rBoardVo.no}">${rBoardVo.title} </a></td>
+									<td class="text-left">
+								  	<c:forEach begin="1" end="${rBoardVo.depth}">
+								        &nbsp;&nbsp;&nbsp;
+								    </c:forEach>
+									<a href="${pageContext.request.contextPath}/rBoard/read?no=${rBoardVo.no}">${rBoardVo.title} </a></td>
 									<td>${rBoardVo.name}</td>
 									<td>${rBoardVo.hit}</td>
 									<td>${rBoardVo.regDate}</td>

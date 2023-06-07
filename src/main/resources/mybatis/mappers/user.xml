@@ -57,6 +57,8 @@
 			order by no desc
 		]]>
 	</select>	
+	
+	
 	<select id="checkId" parameterType="string"
 		resultType="com.javaex.vo.UserVo">
 		<![CDATA[

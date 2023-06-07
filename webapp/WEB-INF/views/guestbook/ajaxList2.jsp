@@ -79,33 +79,8 @@
 					<!-- //guestWrite -->
 					<input type="hidden" name="action" value="add">
 				<!-- </form>-->
-				
 				<div id="guestbookList">
-				
-				
-					<c:forEach items="${guestbookList}" var="guestbookVo">
-						<!-- 리스트 출력 -->
-						<table id="t-${guestbookVo.no}" class="guestRead">
-							<colgroup>
-								<col style="width: 10%;">
-								<col style="width: 40%;">
-								<col style="width: 40%;">
-								<col style="width: 10%;">
-							</colgroup>
-							<tr>
-								<td>${guestbookVo.no}</td>
-								<td>${guestbookVo.name}</td>
-								<td>${guestbookVo.regDate}</td>
-								<td>
-									<button type="button" class="btn btn-danger btn-sm btnModal" data-delno="${guestbookVo.no}">삭제
-									</button>
-								</td>
-							</tr>
-							<tr>
-								<td colspan=4 class="text-left">${guestbookVo.content}</td>
-							</tr>
-						</table>
-					</c:forEach>
+					
 				</div>
 				<!-- //guestRead -->
 			</div>
@@ -149,73 +124,12 @@
 </body>
 <script type="text/javascript">
 
-
-
-
-// 모달창에 있는 삭제버튼 클릭했을 때(완전삭제)
-$("#btnDel").on("click", function(){
-	console.log("삭제버튼 클릭");
-	
-	//서버에 데이타 보내기
-		//데이타 모으기
-		var password =$("#modalPassword").val();
-		var no = $("#modalNo").val();
-		
-		//객체로 만들기
-		var guestVo = {
-			password: password,
-			no: no
-		};
-		
-		console.log(guestVo);
-	
-		$.ajax({
-			url : "${pageContext.request.contextPath}/api/guestbook/remove",
-			type : "post",
-			// contentType : "application/json",
-			data : {password: password,
-					no:no},
-					
-			// 데이터 받은 후 
-			dataType : "json",
-			success : function(jsonResult){
-				console.log(jsonResult);
-				// 성공시 ㅊㅓㄹㅣㅎㅐㅇㅑ할 코드
-				if(jsonResult > 0 ){
-					console.log($("#t-"+guestVo.no).remove());
-					$("#myModal").modal("hide");
-				}else{
-					alert("비번틀림 ㅋ")
-				}
-			},
-			error : function(XHR, status, error){
-				// 실패
-			}
-		});
+// 돔생성 완성
+$(document).ready(function(){
+	fetchList();
 });
 
-//삭제 모달창 호출 버튼 --> 모달창  뜸
-$("#guestbookList").on("click", ".btnModal" , function(){
-	console.log("모달창 호출버튼 클릭");
-	
-	//초기화해주깅
-	$("#modalPassword").val("");
-	$("#modalNo").val("");
-	
-	// 방명록 글번호 input창
-	// 삭제버튼 태그에서 no값 가져오기
-	var no = $(this).data("delno");
-	console.log(no);
-	
-	// 모달창 input태그에 no값 넣기
-	$('#modalNo').val(no);
-	
-	//모달창 호출
-	$('#myModal').modal('show')
-});
-
-
-// 방명록 저장 버튼 클릭할 때
+//방명록 저장 버튼 클릭할 때
 $("#btnSubmit").on("click",function(){
 	console.log("버튼클릭")
 
@@ -228,18 +142,18 @@ $("#btnSubmit").on("click",function(){
 		password: password,
 		content: content
 	};
+	
+	var str = JSON.stringify(guestbookVo);
 
-	console.log(guestbookVo);
+	console.log(str);
 	
 	// ajax통신 -> 요청은 같은 기술 데이터 응답에만 온다
 	
-	 $.ajax({
-		url : "${pageContext.request.contextPath}/api/guestbook/add",
+	$.ajax({
+		url : "${pageContext.request.contextPath}/api/guestbook/add2",
 		type : "post",
-		// contentType : "application/json",
-		data : {name: name,
-				password: password,
-				content: content},
+		contentType : "application/json",
+		data : str,
 				
 		// 데이터 받은 후 
 		dataType : "json",
@@ -249,7 +163,7 @@ $("#btnSubmit").on("click",function(){
 			
 			if(jsonResult.result == "success"){
 				// 정상 처리
-				render(jsonResult.data);	// 리스트에 추가
+				render(jsonResult.data, "up");	// 리스트에 추가
 				
 				//등록폼 비우기
 				$("[name='name']").val("");
@@ -268,7 +182,32 @@ $("#btnSubmit").on("click",function(){
 		
 	}); 
 });
-function render (guestbookVo){
+
+function fetchList(){
+	// 전체리스트 호출 가져오기
+	// 그리기
+	$.ajax({
+		url: "${pageContext.request.contextPath}/api/guestbook/list",
+		type: "post",
+		
+		dataType: "json",
+		success: function(result){
+			console.log(result)
+			/* 성공시 처리해야 될 코드 작성 */
+			for(var i =0; i<result.data.length; i++){
+				render(result.data[i], "down");
+			}
+		},
+		error: function(){
+			
+		}
+	});
+	
+	
+}
+
+// 방명록 리스트 그리기
+function render (guestbookVo, dir){
 	var str = "";
 	str += ' <table id="t-'+ guestbookVo.no +'" class="guestRead">';
 	str += ' 	<colgroup>';
@@ -288,7 +227,14 @@ function render (guestbookVo){
 	str += ' 	</tr>';
 	str += ' </table>';
 	
-	$("#guestbookList").prepend(str);
+	if(dir == 'up'){
+		$("#guestbookList").prepend(str);
+	}else if(dir == 'down'){
+		$("#guestbookList").append(str);
+	}else{
+		console.log("에러요");
+	}
+	
 
 }
 
