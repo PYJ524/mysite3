@@ -234,9 +234,8 @@ function render (guestbookVo, dir){
 	}else{
 		console.log("에러요");
 	}
-	
-
 }
+
 
 </script>
 

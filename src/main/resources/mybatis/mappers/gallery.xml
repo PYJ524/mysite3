@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="gallery">
+
+	<!-- 쿼리문 작성 -->
+
+	<select id="list" resultType="com.javaex.vo.GalleryVo">
+		<![CDATA[
+			select a.no
+			     , user_no as "userNo"
+			     , content
+			     , filePath as "filePath"
+			     , orgname as "orgName"
+			     , savename as "saveName"
+			     , filesize as "fileSize"
+			     , b.name
+			from gallery a, users b
+			where a.user_no = b.no
+		]]>
+	</select>
+	
+	<insert id="insert" parameterType="com.javaex.vo.GalleryVo">
+		<![CDATA[
+			insert into gallery 
+			values(
+			    seq_gallery_no.nextval
+			  , #{userNo}
+			  , #{content}
+			  , #{filePath}
+			  , #{orgName}
+			  , #{saveName}
+			  , #{fileSize}
+			)
+		]]>
+	</insert>
+
+</mapper>
