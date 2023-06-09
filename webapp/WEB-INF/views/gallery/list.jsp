@@ -20,21 +20,14 @@
 <body>
 	<div id="wrap">
 
+		<!-- header -->
 		<c:import url="/WEB-INF/views/include/header.jsp"></c:import>
 		<!-- //header -->
 
 		<!-- nav -->
-		<div id="nav">
-			<ul>
-				<li><a href="${pageContext.request.contextPath }/guestbook/addList">방명록</a></li>
-				<li><a href="">갤러리</a></li>
-				<li><a href="${pageContext.request.contextPath }/board/list2">게시판</a></li>
-				<li><a href="">입사지원서</a></li>
-			</ul>
-			<div class="clear"></div>
-		</div>
+		<c:import url="/WEB-INF/views/include/nav.jsp"></c:import>
 		<!-- //nav -->
-
+		
 		<c:import url="/WEB-INF/views/include/galleryAside.jsp"></c:import>
 		<!-- //aside -->
 
@@ -69,12 +62,15 @@
 						<c:forEach items="${galleryList}" var="galleryVo" >
 						<li>
 							<div class="view">
-							<input type ="hidden" class ="userNO" value="${galleryVo.userNo}">
-							<input type ="hidden" class ="loginNO" value="${sessionScope.uInfo.no}">
-							<input type ="hidden" class ="content" value="${galleryVo.content}">
-								<img id="btnImg" class="imgItem" src="${pageContext.request.contextPath}/list/${galleryVo.saveName}">
-								<div class="imgWriter">
-									작성자: <strong>${galleryVo.name}</strong>
+								<div>
+									<input type ="hidden" class ="userNO" value="${galleryVo.userNo}">
+									<input type ="hidden" class ="loginNO" value="${sessionScope.uInfo.no}">
+									<input type ="hidden" class ="content" value="${galleryVo.content}">
+									<img id="btnImg" class="imgItem" src="${pageContext.request.contextPath}/list/${galleryVo.saveName}">
+									<input type ="hidden" class ="no" value="${galleryVo.no}">
+									<div class="imgWriter">
+										작성자: <strong>${galleryVo.name}</strong>
+									</div>
 								</div>
 							</div>
 						</li>
@@ -126,8 +122,6 @@
 						<button type="submit" class="btn" id="btnUpload">등록</button>
 					</div>
 				</form>
-
-
 			</div>
 			<!-- /.modal-content -->
 		</div>
@@ -161,8 +155,9 @@
 				</div>
 				<form method="" action="">
 					<div class="modal-footer">
+						<input id="modalNo" type="hidden" value="">
 						<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-							<button type="button" class="btn btn-danger" id="btnDel">삭제</button>
+						<button type="button" class="btn btn-danger" id="btnDel">삭제</button>
 					</div>
 				</form>
 
@@ -178,6 +173,45 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
+	
+	// 삭제 이벤트
+	/* $(".btn-danger").on("click", function(){
+	console.log("삭제버튼 클릭");
+	
+	//서버에 데이타 보내기
+		//데이타 모으기
+		 var no = $("#modalNo").val();
+		
+		//객체로 만들기
+		var galleryVo = {
+			no: no
+		};
+		
+		console.log(guestVo);
+	
+		 $.ajax({
+			url : "${pageContext.request.contextPath}/api/guestbook/remove",
+			type : "post",
+			// contentType : "application/json",
+			data : {no:no},
+			// 데이터 받은 후 
+			dataType : "json",
+			success : function(jsonResult){
+				console.log(jsonResult);
+				// 성공시 ㅊㅓㄹㅣㅎㅐㅇㅑ할 코드
+				if(jsonResult > 0 ){
+					console.log($("#t-"+guestVo.no).remove());
+					$("#viewModal").modal("hide");
+				}else{
+					alert("비번틀림 ㅋ")
+				}
+			},
+			error : function(XHR, status, error){
+				// 실패
+			}
+		}); 
+	}); */
+	
 	// 이미지 클릭 이벤트
   $("#viewArea").on("click", ".imgItem", function() {
     var imageUrl = $(this).attr("src");

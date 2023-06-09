@@ -1,6 +1,8 @@
 package com.javaex.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,22 @@ public class BoardDao {
 
 	@Autowired
 	private SqlSession sqlSession;
+	
+	public List<BoardVo> selectList3(int startRnum, int endRnum, String keyword){
+		System.out.println("BoardDao.selectList3()");
+		System.out.println(startRnum+ " " + endRnum);
+		
+		Map<String, Object> bMap = new HashMap<String, Object>();
+		bMap.put("startRnum", startRnum);
+		bMap.put("endRnum", endRnum);
+		bMap.put("keyword", keyword);
+		System.out.println(bMap);
+			
+		List<BoardVo> boardList = sqlSession.selectList("board.selectList3", bMap);
+		System.out.println(boardList);
+
+		return boardList;
+	}
 
 	/* 게시판 리스트 출력용 */
 	public List<BoardVo> list(String keyword) {
@@ -39,7 +57,13 @@ public class BoardDao {
 	
 	public void update(BoardVo boardVo) {
 		System.out.println("BoardDao.update()");
-		System.out.println(boardVo);
 		sqlSession.update("board.update", boardVo);
+	}
+	
+	public int totalCount(String keyword) {
+		System.out.println("boardDao.totalCount()");
+		int total = sqlSession.selectOne("board.totalCount", keyword);
+		System.out.println(total);
+		return total;
 	}
 }
