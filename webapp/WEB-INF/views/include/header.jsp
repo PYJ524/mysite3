@@ -7,7 +7,6 @@
 		<h1>
 			<a href="${pageContext.request.contextPath}/main">MySite</a>
 		</h1>
-
 		<c:if test="${sessionScope.uInfo == null}">
 			<ul>
 				<li><a href="${pageContext.request.contextPath}/user/loginForm">로그인</a></li>

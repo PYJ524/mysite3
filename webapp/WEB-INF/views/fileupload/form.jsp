@@ -43,7 +43,7 @@
 				</div>
 				<!-- //content-head -->
 				<div id="file">
-					<form method="post" action="${pageContext.request.contextPath}/fileUpload/upload" enctype="multipart/form-data">
+					<form method="post" action="${pageContext.request.contextPath}/fileUpload/write" enctype="multipart/form-data">
 						<table>
 							<colgroup>
 								<col style="width: 600px;">

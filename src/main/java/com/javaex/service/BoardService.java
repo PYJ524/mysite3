@@ -16,6 +16,7 @@ public class BoardService {
 	@Autowired
 	private BoardDao boardDao;
 	
+	//페이징 
 	public Map<String, Object> getList3(int crtPage, String keyword){
 		System.out.println("BoardService.getList3()");
 		

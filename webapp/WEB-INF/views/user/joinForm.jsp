@@ -13,9 +13,64 @@
 </head>
 
 <script type="text/javascript">
-			
 	// 아이디 중복체크 버튼 클릭했을 때
 	$(window).load(function(){
+		//예제
+		// 원래의 태그의 기능을 사용하지 않을 때
+		$("#naver").on("click", function(event){
+			event.preventDefault();
+		});
+		
+		// 정보 입력 관련 에러
+		$("#joinSubmitForm").on("submit", function(){
+			console.log("전송버튼 클릭");
+			
+			// 아이디 체크
+			var id = $("#input-uid").val();
+			if(id.length<1){		// 입력안했으면
+				alert("ID를 입력해주세요.");			
+				return false;
+			}else if(id.length>30){
+				alert("ID가 길이를 초과했습니다.(30자)");			
+				return false;
+			}
+			
+			// 패스워드 체크
+			var pass = $("#input-pass").val();
+			console.log(pass)
+			if(pass.length<1){
+				alert("Password가 입력되지 않았습니다.");			
+				return false;
+			}else if(pass.length < 6 || pass.length > 30){
+				alert("Password가 길이가 맞지 않습니다.(6~30자)");			
+				return false;
+			}
+			
+			// 이름 체크
+			var name = $("#input-name").val();
+			if(name.length<1){
+				alert("이름을 입력해주세요.");			
+				return false;
+			}
+			
+ 			/* rdo-male rdo-female */
+			// 성별 체크
+			var gender = $(".gender").is(":checked");
+ 			if(gender == false){
+				alert("성별을 체크해 주세요.");
+				return false;
+ 			}
+			
+			// 약관동의 체크
+			var agree = $("#chk-agree").is(":checked");
+			if(agree == false){
+				alert("약관에 동의해 주세요.");
+				return false;
+			}
+			
+			return false;
+		});
+		
 		$("#checkId").on("click",function(){
 			console.log("버튼클릭");
 			var id = $("[name=id]").val();
@@ -85,7 +140,7 @@
 
 			<div id="user">
 				<div id="joinForm">
-					<form action="${pageContext.request.contextPath}/user/join" method="get">
+					<form id="joinSubmitForm" action="${pageContext.request.contextPath}/user/join" method="get">
 						<!-- 아이디 -->
 						<div class="form-group">
 							<label class="form-text" for="input-uid">아이디</label> 
@@ -112,10 +167,10 @@
 							<span class="form-text">성별</span> 
 							
 							<label for="rdo-male">남</label> 
-							<input type="radio" id="rdo-male" name="gender" value="male" > 
+							<input type="radio" id="rdo-male" class="gender" name="gender" value="male" > 
 							
 							<label for="rdo-female">여</label> 
-							<input type="radio" id="rdo-female" name="gender" value="female" > 
+							<input type="radio" id="rdo-female" class="gender" name="gender" value="female" > 
 
 						</div>
 
@@ -131,8 +186,9 @@
 		                <div class="button-area">
 		                    <button type="submit" id="btn-submit">회원가입</button>
 		                </div>
-						
 					</form>
+					
+					<a id="naver" href="https://www.naver.com/">네이버</a>
 				</div>
 				<!-- //joinForm -->
 			</div>

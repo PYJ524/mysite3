@@ -31,6 +31,7 @@ public class FileUploadController {
 	@RequestMapping(value ="/write", method= {RequestMethod.GET, RequestMethod.POST})
 	public String write(@RequestParam("file") MultipartFile file, Model model) {
 		System.out.println("FileUploadController.upload()");
+		System.out.println(file);
 		
 		String saveName = fileUploadService.restore(file);
 		model.addAttribute("saveName",saveName);

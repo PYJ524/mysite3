@@ -57,7 +57,7 @@ public class UserController {
 		
 		UserVo userInfo = userService.login(userVo);
 		System.out.println(userInfo);
-		if(userInfo !=null) {
+		if(userInfo != null) {
 			System.out.println("로그인 성공!!");
 			//세션에 저장
 			session.setAttribute("uInfo", userInfo);
