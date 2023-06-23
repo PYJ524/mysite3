@@ -31,7 +31,7 @@ public class GuestbookDao {
 	}
 
 	public void insertSelectKey(GuestbookVo vo) {
-		System.out.println("GusetbookDao.insert2()");
+		System.out.println("GusetbookDao.insertSelectKey()");
 		sqlSession.insert("guestbook.insertSelectKey", vo);
 	}
 	
