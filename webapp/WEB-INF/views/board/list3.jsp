@@ -92,14 +92,15 @@
 
 						<div class="clear"></div>
 					</div>
-					<c:if test="${sessionScope.uInfo.no != null}">
-						<a id="btn_write" href="${pageContext.request.contextPath}/board/writeForm">글쓰기</a>
-					</c:if>
-
-					<c:if test="${sessionScope.uInfo.no == null}">
-						<a>${sessionScope.no}</a>
-						<a id="btn_write" href="${pageContext.request.contextPath}/user/loginForm">글쓰기</a>
-					</c:if>
+					<c:choose>
+						<c:when test="${sessionScope.uInfo.no != null}">
+							<a id="btn_write" href="${pageContext.request.contextPath}/board/writeForm">글쓰기</a>
+						</c:when>
+						<c:otherwise>
+							<a>${sessionScope.no}</a>
+							<a id="btn_write" href="${pageContext.request.contextPath}/user/loginForm">글쓰기</a>
+						</c:otherwise>
+					</c:choose>
 				</div>
 				<!-- //list -->
 			</div>

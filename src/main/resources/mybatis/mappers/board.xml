@@ -70,7 +70,9 @@
 								and b.title like '%'|| #{keyword} ||'%'
 							</if>
 						<![CDATA[	
-			            order by no desc) ot) ort
+			            order by no desc
+			            ) ot
+	            ) ort
 			where rn >= #{startRnum}
 			and rn <= #{endRnum}
 		]]>

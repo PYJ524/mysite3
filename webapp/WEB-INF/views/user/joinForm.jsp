@@ -68,7 +68,7 @@
 				return false;
 			}
 			
-			return false;
+			return ture;
 		});
 		
 		$("#checkId").on("click",function(){
@@ -187,8 +187,6 @@
 		                    <button type="submit" id="btn-submit">회원가입</button>
 		                </div>
 					</form>
-					
-					<a id="naver" href="https://www.naver.com/">네이버</a>
 				</div>
 				<!-- //joinForm -->
 			</div>
